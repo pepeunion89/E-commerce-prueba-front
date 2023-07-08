@@ -1,0 +1,81 @@
+<div class="contenedor-productos">
+    <div id="boton-agregar-producto"  class="contenedor-boton-agregar-producto">        
+        <button class="btn btn-success d-flex" (click)="mostrarPanelNuevoProducto()"> 
+            <div class="d-flex flex-column me-1" style="font-size: 0.7rem; height: 24px; line-height: 24px;">
+                <i class="bi bi-plus-lg fw-bold"></i>
+            </div>Agregar producto
+        </button>
+    </div>
+    <div id="nuevo-producto" class="contenedor-nuevo-producto my-2 py-3 px-3">
+       <div class="nombre-nuevo-producto d-flex w-50">
+            <div class="d-flex flex-column justify-content-center align-content-center">
+                <p class="m-0 text-white">Producto</p>
+            </div>
+            <input type="text" placeholder="Producto...">
+       </div>
+       <div class="precio-nuevo-producto d-flex w-25">
+            <div class="d-flex flex-column justify-content-center align-content-center">
+                <p class="m-0 text-white">Precio</p>
+            </div>
+            <input type="text" placeholder="Precio..." class="w-50">
+       </div>
+       <button type="button" class="guardar-nuevo-producto btn ms-auto">Guardar</button>
+       <button type="button" class="btn btn-danger ms-1" (click)="ocultarPanelNuevoProducto()">Cancelar</button>
+    </div>    
+    <div class="contenedor-tablas">
+        <table class="table table-hover table-1 mb-0">
+            <thead>
+                <tr>
+                    <th class="col-1">#</th>
+                    <th class="col-5">Producto</th>
+                    <th class="col-2">Precio</th>
+                    <th class="col-2" style="text-indent: 1.2rem">Stock</th>
+                    <th class="col-2 text-center">Acciones</th>
+                    <th clasS="barra-scroll"></th>
+                </tr>
+            </thead>
+        </table>
+        <div class="tabla-productos-stock">        
+            <table class="table table-hover table-2">            
+                <tbody>
+                    <tr *ngFor="let productoStock of listProductoStock" style="height: 7rem;">
+                        <td class="col-1">
+                            <div class="d-flex flex-column w-100 justify-content-center align-content-center" style="height: 6rem;">
+                                <p class="mb-0">{{productoStock.idproducto}}</p>
+                            </div>
+                        </td>
+                        <td class="col-5">
+                            <div class="d-flex flex-column w-100 justify-content-center align-content-center" style="height: 6rem;">
+                                <p class="mb-0">{{productoStock.nompro}}</p>
+                            </div>                        
+                        </td>
+                        <td class="col-2">
+                            <div class="d-flex flex-column w-100 justify-content-center align-content-center" style="height: 6rem;">
+                                <p class="mb-0">${{productoStock.precio}}</p>
+                            </div> 
+                        </td>
+                        <td class="col-2 celda-contenedor-quantity d-flex">
+                            <div id="quantity-checker-{{productoStock.idproducto}}" class="quantity-container"><!-- -->
+                                <div class="flechas-cantidad" style="font-size: 0.8rem;" (click)="increaseQuantity(productoStock.idproducto, productoStock.nompro)">
+                                  <i class="icono-flecha bi bi-triangle"></i>
+                                </div>            
+                                <input id="quantity-{{productoStock.idproducto}}" type="text" style="height: 20px" class="quantity-input" value={{productoStock.cantidad}} (input)="validarCantidad($event, productoStock.idproducto)">
+                                <div class="flechas-cantidad flecha-abajo" style="font-size: 0.8em; transform: rotate(180deg);" (click)="decreaseQuantity(productoStock.idproducto, productoStock.nompro)">
+                                  <i class="icono-flecha bi bi-triangle"></i>
+                                </div>
+                            </div>   
+                            <input id="id-checkbox-stock-{{productoStock.idproducto}}" class="checkbox-stock ms-2" type="checkbox" name="check1" (click)="checkearStock(productoStock.idproducto)" >
+                        </td>
+                        <td class="col-2" style="font-size: 1.5rem">
+                            <div class="d-flex w-100 justify-content-center align-content-center" style="height: 6rem; line-height: 6rem;">
+                                <i class="bi bi-pencil-square"></i>
+                                <i class="bi bi-dash-circle ms-2"></i>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    
+        </div>
+    </div>
+</div>

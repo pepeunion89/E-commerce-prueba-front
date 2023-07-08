@@ -1,0 +1,7 @@
+<div class="contenedor-container py-5">
+    <div class="contenedor-movil d-flex" id="contenedor-movil-id">
+        <app-ventas id="ventas-app" class="vspd" (listaActualizaraParaProducto)="actualizarStock($event)"></app-ventas>
+        <app-productos id="productos-app" class="vspd" [listStockActualizado]="stockActualizado"></app-productos>
+        <app-detalles id="detalles-app" class="vspd ps-4"></app-detalles>
+    </div>
+</div>

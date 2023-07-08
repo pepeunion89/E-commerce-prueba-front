@@ -1,0 +1,94 @@
+<div class="contenedor-tablas d-flex w-100">  
+  
+  <!-- FILA TITULOS -->
+
+  <div class="d-flex flex-column">
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">@</span>
+      <input type="text" class="form-control px-2" placeholder="Buscar producto..." aria-label="Producto" aria-describedby="basic-addon1">
+    </div>
+    <table class="table table-hover mb-0">
+      <thead class="thead-productos">
+        <tr>
+          <th scope="col"># Código</th>
+          <th scope="col">Producto</th>
+          <th scope="col">Precio</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+    </table>
+    <div class="tabla-productos px-2" style="border: 1px solid lightgray;">    
+      <tbody>
+        <tr class="opcion-producto" *ngFor="let producto of listProductos">
+          <th scope="row">{{producto.idproducto}}</th>
+          <td>{{producto.nompro}}</td>
+          <td>{{producto.precio}}</td>
+          <td><i class="bi bi-plus-circle" style="font-size: 1.5rem" (click)="agregarAlCarrito(producto)"></i></td>
+        </tr>        
+      </tbody>
+    </div>
+  </div>
+  
+  <!-- FILA CARGA DE CARRITO -->
+
+  <div id="tabla-carrito-id" class="tabla-carrito ms-5">
+   
+      <div class="tabla-item tabla-cabecera fw-bold">
+        <div class="col-6">
+          <p>Producto</p>
+        </div>
+        <div class="col-3">
+          <p class="indent-precio">Precio</p>
+        </div>
+        <div class="col-2">
+          <p>Cantidad</p>
+        </div>
+        <div class="col-1"></div>
+      </div>
+      <div class="tabla-item tabla-contenido">
+        <div class="carrito-vacio" *ngIf="listProductosCarrito.length === 0">
+          <i class="bi bi-cart4 fs-1"></i>CARRITO VACIO
+        </div>
+        <div *ngFor="let producto of listProductosCarrito" class="registro-venta venta-{{producto.idproducto}} estilo-{{listProductosCarrito.indexOf(producto)%2}} border-bottom" >
+          <div class="col-6">
+            <p>{{producto.nompro}}</p>
+          </div>
+          <div class="col-3">
+            <p>${{producto.precio}}</p>
+          </div>
+          <div class="col-2">
+            <div class="quantity-container d-flex">
+              <div class="flechas-cantidad" style="font-size: 0.8rem;" (click)="increaseQuantity(producto.idproducto, producto.nompro)">
+                <i class="icono-flecha bi bi-triangle"></i>
+              </div>            
+              <input (input)="validarCantidad($event, producto.idproducto)" id="quantity-{{producto.idproducto}}" type="text" style="height: 20px" class="quantity-input" value="1">
+              <div class="flechas-cantidad flecha-abajo" style="font-size: 0.8rem; transform: rotate(180deg);" (click)="decreaseQuantity(producto.idproducto, producto.nompro)">
+                <i class="icono-flecha bi bi-triangle"></i>
+              </div>
+            </div>    
+          </div>
+          <div class="col-1">
+            <p style="text-indent: -0.3rem"><i class="quitar-producto bi bi-dash-circle" style="font-size: 1.5rem" (click)="eliminarDelCarrito(producto)"></i></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILA SUMA TOTALES -->
+      <div class="tabla-item tabla-totales fw-bold">
+
+        <div class="col-12">
+          <p><span class="me-2" style="color: lightgreen" >Total: </span><span class="fs-3">${{getTotalCarrito()}}</span></p>
+        </div>
+      </div>      
+      <div *ngIf="listProductosCarrito.length!=0" class="tabla-item tabla-totales-finalizar fw-bold">
+
+        <div (click)="guardarVenta()">
+          <i class="icono-finalizar bi bi-arrow-right-square"></i>
+          <p [@backgroundAnimation]="backgroundColor" id="parrafo-finalizar-venta">FINALIZAR VENTA</p>
+        </div>
+
+      </div>   
+      
+  </div>
+  
+</div>
