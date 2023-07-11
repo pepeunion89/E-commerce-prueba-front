@@ -5,6 +5,8 @@ import { ProductoStock } from 'src/app/models/productostock';
 import { Stock } from 'src/app/models/stock';
 import { ProductosService } from 'src/app/services/productos.service';
 import { StockService } from 'src/app/services/stock.service';
+import { NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-productos',
@@ -20,7 +22,9 @@ export class ProductosComponent implements OnInit {
   public listProductoStock: ProductoStock[] = [];
   comparador = 1;
 
-  constructor(private productoService: ProductosService, private stockService: StockService, private cdr: ChangeDetectorRef) { }
+  constructor(private productoService: ProductosService, private stockService: StockService, private cdr: ChangeDetectorRef) {
+   
+   }
 
   ngOnInit(): void {
 
@@ -209,6 +213,48 @@ export class ProductosComponent implements OnInit {
     this.comparador = 1;
 
     this.cdr.detectChanges();
+  }
+
+
+  // METODO NUEVO PRODUCTO
+
+  public agregarProducto(ngProducto: NgForm){
+
+    console.log(ngProducto.value);
+
+    document.getElementById('cerrar-nuevo-producto')?.click();
+
+    
+// AGREGAMOS PRODUCTO NUEVO
+  this.productoService.addProducto(ngProducto.value).subscribe({
+      next:(Response: Producto)=>{
+        alert("Se ha agregado "+Response.nompro+" correctamente");
+
+        // CARGAMOS SU STOCK
+        let stock: Stock = {} as Stock;
+        stock.idstock = Response.idproducto;
+        stock.idproducto = Response.idproducto;
+        stock.nompro = Response.nompro;
+        stock.cantidad = 1;
+        
+        // LUEGO AGREGAMOS EL PRODUCTO A LA TABLA DE STOCK
+        this.stockService.addStock(stock).subscribe({
+          next:(Response: Stock)=>{
+            alert("Stock de "+Response.nompro+" agregado");
+          }
+        });
+
+
+      },
+      error:(error: HttpErrorResponse)=>{
+        alert("Error "+error.message+" al cargar nuevo producto");
+      }
+    }) 
+
+    
+
+    ngProducto.reset();
+
   }
 
 }

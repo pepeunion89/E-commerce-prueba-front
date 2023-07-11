@@ -19,4 +19,11 @@ export class ProductosService {
     return this.http.get<Producto[]>(`${this.apiServerUrl}/producto/lista`);
 
   }
+
+  public addProducto(producto: Producto):Observable<Producto>{
+    
+    return this.http.post<Producto>(`${this.apiServerUrl}/producto/add`, producto);
+
+  }
+
 }

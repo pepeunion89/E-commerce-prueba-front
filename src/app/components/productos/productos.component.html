@@ -6,22 +6,28 @@
             </div>Agregar producto
         </button>
     </div>
+    <!--   FORMULARIO ALTA PRODUCTO   -->
     <div id="nuevo-producto" class="contenedor-nuevo-producto my-2 py-3 px-3">
-       <div class="nombre-nuevo-producto d-flex w-50">
-            <div class="d-flex flex-column justify-content-center align-content-center">
-                <p class="m-0 text-white">Producto</p>
-            </div>
-            <input type="text" placeholder="Producto...">
-       </div>
-       <div class="precio-nuevo-producto d-flex w-25">
-            <div class="d-flex flex-column justify-content-center align-content-center">
-                <p class="m-0 text-white">Precio</p>
-            </div>
-            <input type="text" placeholder="Precio..." class="w-50">
-       </div>
-       <button type="button" class="guardar-nuevo-producto btn ms-auto">Guardar</button>
-       <button type="button" class="btn btn-danger ms-1" (click)="ocultarPanelNuevoProducto()">Cancelar</button>
+        <form #identificadorNuevoProducto="ngForm" (ngSubmit)="agregarProducto(identificadorNuevoProducto)">
+            
+                    <div class="nombre-nuevo-producto d-flex w-50">
+                            <div class="d-flex flex-column justify-content-center align-content-center">
+                                <p class="m-0 text-white">Producto</p>
+                            </div>
+                            <input type="text" name="nompro" id="nompro" placeholder="Producto..." ngModel required>
+                    </div>
+                    <div class="precio-nuevo-producto d-flex w-25">
+                            <div class="d-flex flex-column justify-content-center align-content-center">
+                                <p class="m-0 text-white">Precio</p>
+                            </div>
+                            <input type="text" name="precio" id="precio" placeholder="Precio..." class="w-50" ngModel required>
+                    </div>
+                    <button type="submit" class="guardar-nuevo-producto btn ms-auto">Guardar</button>
+                    <button id="cerrar-nuevo-producto" type="button" class="btn btn-danger ms-1" (click)="ocultarPanelNuevoProducto()">Cancelar</button>
+            
+        </form>
     </div>    
+     <!--   TERMINA FORMULARIO ALTA PRODUCTO   -->
     <div class="contenedor-tablas">
         <table class="table table-hover table-1 mb-0">
             <thead>

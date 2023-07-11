@@ -22,6 +22,12 @@ export class StockService {
 
   }
 
+  public addStock(stock: Stock):Observable<Stock>{
+
+    return this.http.post<Stock>(`${this.apiServerUrl}/stock/add`, stock);
+
+  }
+
   public updateStock(stock: Stock):Observable<Stock>{
 
     return this.http.put<Stock>(`${this.apiServerUrl}/stock/update`, stock);
