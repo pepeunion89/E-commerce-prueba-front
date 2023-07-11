@@ -1,0 +1,158 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
+.contenedor-productos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .contenedor-boton-agregar-producto{
+      width: 740px;
+      display: flex;
+      margin-bottom: 1rem;
+      justify-content: right;
+
+      button{        
+        box-shadow: 0 0 5px gray;
+      }
+
+    }
+
+    .contenedor-nuevo-producto{
+      display: none;
+      box-shadow: 0 0 10px black;
+      width: 740px;
+      background-color: #439A97;
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+
+      transition: 0.2s;
+          -webkit-transition: 0.2s;
+          -moz-transition: 0.2s;
+          -ms-transition: 0.2s;
+          -o-transition: 0.2s;
+
+      form{
+        display: flex;
+
+        .form-group{
+          width: 100%;
+          display: flex;
+        }
+
+      }
+
+        div{
+          
+            p{
+              padding: 0 0.5rem;
+              line-height: 40px;
+              background-color: black;
+              border-radius: 5px 0px 0px 5px ;
+              -webkit-border-radius: 5px 0px 0px 5px ;
+              -moz-border-radius: 5px 0px 0px 5px ;
+              -ms-border-radius: 5px 0px 0px 5px ;
+              -o-border-radius: 5px 0px 0px 5px ;
+              }
+
+        }
+
+        input{
+          text-indent: 0.5rem;
+          border: 0px;
+          border-radius: 0px 5px 5px 0px ;
+          -webkit-border-radius: 0px 5px 5px 0px ;
+          -moz-border-radius: 0px 5px 5px 0px ;
+          -ms-border-radius: 0px 5px 5px 0px ;
+          -o-border-radius: 0px 5px 5px 0px ;
+
+        }
+
+        .guardar-nuevo-producto{
+          background-color: #62B6B7;
+          color: white;
+          transition: 0.2s;
+          -webkit-transition: 0.2s;
+          -moz-transition: 0.2s;
+          -ms-transition: 0.2s;
+          -o-transition: 0.2s;
+          
+        &:hover{
+
+            background-color: #3d6666;
+
+          }
+
+        }
+
+    }
+
+    .contenedor-tablas{
+      box-shadow: 0 0 20px lightgray;
+      padding: 20px;
+      background-color: white;
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+
+      .table-1{
+          width: 700px;
+      }
+
+      .tabla-productos-stock{
+          width: 700px;
+          height: 500px;
+          overflow-y: scroll;
+
+          .table-2{
+
+            .celda-contenedor-quantity{
+              width: 100%;
+              height: 7rem;
+              justify-content: center;
+              align-items: center;
+
+              .quantity-container {
+                  display: none;
+                  align-items: center;
+                  flex-direction: column;
+                }
+                
+                .flechas-cantidad {
+                  width: 23px; 
+                  min-height: 10px; 
+                  max-height: 18px;
+                  line-height: 18px;
+                  border-left: 5px solid transparent;
+                  border-right: 5px solid transparent;
+                  cursor: pointer;         
+                  
+                  .icono-flecha:hover{
+                      cursor: pointer;
+                      color: green;
+                  }
+          
+                }
+                
+                
+                
+                .quantity-input {
+                  width: 40px;
+                  text-align: center;
+                  border: 1px solid black;
+                  background-color: white;
+                }
+
+              }
+
+          }
+      
+
+      }
+    } 
+}

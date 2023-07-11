@@ -1,0 +1,295 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
+.contenedor-tablas{
+
+    .thead-productos{
+            background-color: #62B6B7;
+            color:white;
+            text-shadow: 1px 1px 2px black;
+
+            tr th:first-child{
+                width: 20%;
+            }
+
+            tr th:nth-child(2){
+                width: 60%;
+            }
+
+            tr th:nth-child(3){
+                width: 20%;
+            }
+
+        }
+
+    .tabla-productos{    
+        width: 100%;
+        height: 390px;        
+        overflow-y: scroll;
+        scrollbar-width: thin;
+        scrollbar-color: #62B6B7 #62B6B7;
+        background-color: white;
+
+        tbody{
+
+            .opcion-producto{
+                transition: all 0.2s;
+                -webkit-transition: all 0.2s;
+                -moz-transition: all 0.2s;
+                -ms-transition: all 0.2s;
+                -o-transition: all 0.2s;
+                
+                &:hover{
+                    cursor: pointer;
+                    background-color: lightcyan;
+                }
+
+                td:last-child{
+                    width: 140px;
+                    color: lightgray;
+                    transition: all 0.2s;                    
+                    -webkit-transition: all 0.2s;
+                    -moz-transition: all 0.2s;
+                    -ms-transition: all 0.2s;
+                    -o-transition: all 0.2s;    
+                }
+
+                td:last-child i{
+                    transition: all 0.2s;                    
+                    -webkit-transition: all 0.2s;
+                    -moz-transition: all 0.2s;
+                    -ms-transition: all 0.2s;
+                    -o-transition: all 0.2s;   
+                }
+
+                td:last-child i:hover{
+                    color:green;
+                }
+            }
+            
+        }
+
+    }
+
+    // CARRITO
+
+    .tabla-carrito{
+        width: 45%;
+        height: 498px;
+        max-height: 500px;
+        overflow: hidden;
+        box-shadow: 0 0 20px gray;
+        border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+
+
+        
+        .tabla-item{
+        display: flex;
+        width: 100%;
+        background-color: white;
+        
+        .carrito-vacio{
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                background-color: #62B6B7;
+                color: white;
+                font-size: 2rem;
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                text-shadow: 1px 1px 2px black;
+            }
+
+        }
+
+        .tabla-cabecera{
+            height: 50px;
+            background-color: black;
+            color: white;
+            
+            border-radius: 10px 10px 0 0;
+            -webkit-border-radius: 10px 10px 0 0;
+            -moz-border-radius: 10px 10px 0 0;
+            -ms-border-radius: 10px 10px 0 0;
+            -o-border-radius: 510px 10px 0 0;
+
+            div{ 
+
+                p{
+                    line-height: 50px;
+                    text-indent: 1rem;
+                }
+
+                .indent-precio{
+                    text-indent: 0.5rem;
+                }
+            }
+
+        }
+
+        .tabla-contenido{
+            flex-direction: column;
+            height: 398px;
+            overflow-y: scroll;
+            
+            .registro-venta{
+                display: flex;
+                width: 100%;
+                height: 66px;
+                align-items: center;
+
+                div{
+                    
+                    p{
+                        height: 47px;
+                        line-height: 66px;
+                        text-indent: 1rem;
+                    }
+
+                }
+
+            }
+
+            .estilo-0{
+                background-color: rgb(235, 235, 235);
+            }
+
+        }
+
+        .tabla-totales{
+            height: 50px;
+            background-color: black;
+            color: white;
+
+            border-radius: 0 0 10px 10px;
+        -webkit-border-radius: 0 0 10px 10px;
+        -moz-border-radius: 0 0 10px 10px;
+        -ms-border-radius: 0 0 10px 10px;
+        -o-border-radius: 0 0 10px 10px;
+
+            div p{
+                line-height: 50px;
+                text-indent: 1rem;
+                width: 100%;
+                text-align: left;
+                font-size: 1rem;
+            }
+
+        }
+
+        .tabla-totales-finalizar{
+            width: 633.19px;
+            height: 50px;
+            background-color: #97DECE;
+            color: black;
+            margin: -50px 0 0 534.19px;
+            transition:all 0.2s;
+                -webkit-transition:all 0.2s;
+                -moz-transition:all 0.2s;
+                -ms-transition:all 0.2s;
+                -o-transition:all 0.2s;
+            
+            border-radius: 0 0 10px 10px;
+                -webkit-border-radius: 0 0 10px 10px;
+                -moz-border-radius: 0 0 10px 10px;
+                -ms-border-radius: 0 0 10px 10px;
+                -o-border-radius: 0 0 10px 10px;
+
+
+            div{
+                display: flex;
+                width: 100%;
+                align-items: center;
+                background-color: #97DECE;
+
+                .icono-finalizar{
+                    margin-top: 3px;
+                    font-size: 3.1rem;
+                }
+                    
+                p{
+                    width: 100%;
+                    font-size: 1.3rem;
+                    line-height: 50px;
+                    text-indent: 1rem;
+                    text-align: center;
+                    margin-bottom: 0px;
+                }
+            }
+
+            &:hover{                
+                cursor: pointer;
+                transform: translateX(-584px);
+                -webkit-transform: translateX(-584px);
+                -moz-transform: translateX(-584px);
+                -ms-transform: translateX(-584px);
+                -o-transform: translateX(-584px);
+
+                p{                    
+                    color: white;
+                    text-shadow: 0 0 5px black;
+                }
+
+            }
+
+        }
+       
+        
+            .quantity-container {
+                align-items: center;
+                flex-direction: column;
+              }
+              
+              .flechas-cantidad {
+                width: 23px; 
+                min-height: 10px; 
+                max-height: 18px;
+                line-height: 18px;
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+                cursor: pointer;         
+                
+                .icono-flecha:hover{
+                    cursor: pointer;
+                    color: green;
+                }
+
+              }
+              
+              
+              
+              .quantity-input {
+                width: 40px;
+                text-align: center;
+                border: 1px solid black;
+                background-color: white;
+              }
+
+            .quitar-producto{
+
+                margin-left: 1rem;
+                color: rgb(255, 144, 144);
+                transition: all 0.2s;
+                -webkit-transition: all 0.2s;
+                -moz-transition: all 0.2s;
+                -ms-transition: all 0.2s;
+                -o-transition: all 0.2s;
+                
+                &:hover{
+                    cursor: pointer;
+                    color: red;
+                }
+
+            }
+
+        
+        
+    }
+
+}
+
