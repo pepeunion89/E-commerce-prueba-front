@@ -20,7 +20,9 @@ export class ProductosComponent implements OnInit {
   public listProductos: Producto[] = [];
   public listStock: Stock[] = [];
   public listProductoStock: ProductoStock[] = [];
+  banderaEdit = 0;
   comparador = 1;
+  
 
   constructor(private productoService: ProductosService, private stockService: StockService, private cdr: ChangeDetectorRef) {
    
@@ -146,7 +148,7 @@ export class ProductosComponent implements OnInit {
       }
   
       if (input.value.length<1){
-        inputASetear.value = "0";
+        inputASetear.value = "1";
       }
 
       //this.cdr.detectChanges();
@@ -254,6 +256,90 @@ export class ProductosComponent implements OnInit {
     
 
     ngProducto.reset();
+
+  }
+
+  public onEdit(idProductoStock:number): void{
+
+    let iconEdit = document.getElementById('id-edit-icon-'+idProductoStock) as HTMLElement;
+
+    if(this.banderaEdit===0){
+
+      let parrafo =  document.getElementById('parrafo-nombre-'+idProductoStock) as HTMLElement;
+      parrafo.style.display= "none";
+
+      let editable = document.getElementById('input-nombre-'+idProductoStock) as HTMLElement;
+      editable.style.display="block";
+
+      this.banderaEdit=1;
+
+    }else{
+      //Checkeamos si camió datos primero
+      let nomProEditado = document.getElementById('input-nombre-'+idProductoStock) as HTMLInputElement;
+     
+      for(let productoStock of this.listProductoStock){
+        if(idProductoStock==productoStock.idproducto){
+
+          if(nomProEditado.value != productoStock.nompro){
+            alert("CAMBIASTE EL NOMBRE! Deseas guardar el cambio?")
+          }
+
+        }
+      }
+       
+
+      let parrafo =  document.getElementById('parrafo-nombre-'+idProductoStock) as HTMLElement;
+      parrafo.style.display= "block";
+
+      let editable = document.getElementById('input-nombre-'+idProductoStock) as HTMLElement;
+      editable.style.display="none";
+       
+
+      this.banderaEdit=0;
+
+    }
+
+
+  }
+
+  public editOdeleteEnter(idProducto: number, editOdelete: String): void{
+
+    if(editOdelete==="edit"){
+
+      let iconEdit = document.getElementById('id-edit-icon-'+idProducto) as HTMLElement;
+
+      iconEdit.style.color = "green";
+      iconEdit.style.cursor = "pointer";
+
+    }else if(editOdelete==="delete"){
+
+      let iconEdit = document.getElementById('id-delete-icon-'+idProducto) as HTMLElement;
+
+      iconEdit.style.color = "red";
+      iconEdit.style.cursor = "pointer";
+
+    }
+
+
+  }
+
+  public editOdeleteLeave(idProducto: number, editOdelete: String): void{
+
+    if(editOdelete==="edit"){
+
+      let iconEdit = document.getElementById('id-edit-icon-'+idProducto) as HTMLElement;
+
+      iconEdit.style.color = "black";
+      iconEdit.style.cursor = "none";
+
+    }else if(editOdelete==="delete"){
+
+      let iconEdit = document.getElementById('id-delete-icon-'+idProducto) as HTMLElement;
+
+      iconEdit.style.color = "black";
+      iconEdit.style.cursor = "none";
+
+    }
 
   }
 

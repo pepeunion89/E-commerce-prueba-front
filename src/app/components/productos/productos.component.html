@@ -52,7 +52,8 @@
                         </td>
                         <td class="col-5">
                             <div class="d-flex flex-column w-100 justify-content-center align-content-center" style="height: 6rem;">
-                                <p class="mb-0">{{productoStock.nompro}}</p>
+                                <p id="parrafo-nombre-{{productoStock.idproducto}}" class="mb-0">{{productoStock.nompro}}</p>
+                                <input id="input-nombre-{{productoStock.idproducto}}" type="text" value="{{productoStock.nompro}}" style="display: none;">
                             </div>                        
                         </td>
                         <td class="col-2">
@@ -73,9 +74,15 @@
                             <input id="id-checkbox-stock-{{productoStock.idproducto}}" class="checkbox-stock ms-2" type="checkbox" name="check1" (click)="checkearStock(productoStock.idproducto)" >
                         </td>
                         <td class="col-2" style="font-size: 1.5rem">
-                            <div class="d-flex w-100 justify-content-center align-content-center" style="height: 6rem; line-height: 6rem;">
-                                <i class="bi bi-pencil-square"></i>
-                                <i class="bi bi-dash-circle ms-2"></i>
+                            <div class="contenedor-iconos-ed d-flex w-100 justify-content-center align-content-center" style="height: 6rem; line-height: 6rem;">
+                                <i id="id-edit-icon-{{productoStock.idproducto}}" class="edit-icon edit-{{productoStock.idproducto}} bi bi-pencil-square" 
+                                                        (click)="onEdit(productoStock.idproducto)" 
+                                                        (mouseenter)="editOdeleteEnter(productoStock.idproducto, 'edit')" 
+                                                        (mouseleave)="editOdeleteLeave(productoStock.idproducto, 'edit')"></i>
+                                <i id="id-delete-icon-{{productoStock.idproducto}}" class="delete-icon delete-{{productoStock.idproducto}} bi bi-dash-circle ms-2"
+                                
+                                (mouseenter)="editOdeleteEnter(productoStock.idproducto, 'delete')" 
+                                (mouseleave)="editOdeleteLeave(productoStock.idproducto, 'delete')"></i>
                             </div>
                         </td>
                     </tr>
