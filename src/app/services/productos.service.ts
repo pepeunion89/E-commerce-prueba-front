@@ -26,4 +26,10 @@ export class ProductosService {
 
   }
 
+  public deleteProducto(idProducto: number):Observable<Number>{
+
+    return this.http.delete<Number>(`${this.apiServerUrl}/producto/delete/${idProducto}`);
+
+  }
+
 }
