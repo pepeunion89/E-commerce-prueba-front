@@ -230,7 +230,7 @@ export class ProductosComponent implements OnInit {
 // AGREGAMOS PRODUCTO NUEVO
   this.productoService.addProducto(ngProducto.value).subscribe({
       next:(Response: Producto)=>{
-        alert("Se ha agregado "+Response.nompro+" correctamente");
+        console.log("Se ha agregado "+Response.nompro+" correctamente");
 
         // CARGAMOS SU STOCK
         let stock: Stock = {} as Stock;
@@ -242,7 +242,30 @@ export class ProductosComponent implements OnInit {
         // LUEGO AGREGAMOS EL PRODUCTO A LA TABLA DE STOCK
         this.stockService.addStock(stock).subscribe({
           next:(Response: Stock)=>{
-            alert("Stock de "+Response.nompro+" agregado");
+            console.log("Stock de "+Response.nompro+" agregado");
+
+            // PROBAMOS ACTUALIZAR EL LISTADO EN WEB
+            this.getProdutos();
+            this.getStock();
+
+            this.listProductoStock = [];
+            for(let producto of this.listProductos){
+              for(let stock of this.listStock){
+                if(producto.idproducto === stock.idproducto){
+                  const productoStock: ProductoStock = {
+                    idproducto : producto.idproducto,
+                    idstock : stock.idstock,
+                    nompro: producto.nompro,
+                    precio: producto.precio,
+                    cantidad: stock.cantidad
+                  };
+                  this.listProductoStock.push(productoStock);
+                }
+              }
+            }      
+
+            this.cdr.detectChanges();    
+
           }
         });
 
@@ -340,6 +363,45 @@ export class ProductosComponent implements OnInit {
       iconEdit.style.cursor = "none";
 
     }
+
+  }
+
+  public onDelete(idProducto: number):void{
+
+    
+
+    this.productoService.deleteProducto(idProducto).subscribe({
+      next:(Response: Number)=>{
+        console.log("Se eliminó el producto con ID "+idProducto);
+
+        //ACTUALIZAMOS TABLA EN WEB
+
+            this.getProdutos();
+            this.getStock();
+
+            this.listProductoStock = [];
+            for(let producto of this.listProductos){
+              for(let stock of this.listStock){
+                if(producto.idproducto === stock.idproducto){
+                  const productoStock: ProductoStock = {
+                    idproducto : producto.idproducto,
+                    idstock : stock.idstock,
+                    nompro: producto.nompro,
+                    precio: producto.precio,
+                    cantidad: stock.cantidad
+                  };
+                  this.listProductoStock.push(productoStock);
+                }
+              }
+            }      
+
+            this.cdr.detectChanges();  
+
+      },
+      error:(Error: HttpErrorResponse)=>{
+        console.log("Error: "+Error);
+      }
+    })
 
   }
 

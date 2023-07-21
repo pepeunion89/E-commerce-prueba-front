@@ -80,9 +80,9 @@
                                                         (mouseenter)="editOdeleteEnter(productoStock.idproducto, 'edit')" 
                                                         (mouseleave)="editOdeleteLeave(productoStock.idproducto, 'edit')"></i>
                                 <i id="id-delete-icon-{{productoStock.idproducto}}" class="delete-icon delete-{{productoStock.idproducto}} bi bi-dash-circle ms-2"
-                                
-                                (mouseenter)="editOdeleteEnter(productoStock.idproducto, 'delete')" 
-                                (mouseleave)="editOdeleteLeave(productoStock.idproducto, 'delete')"></i>
+                                                        (click)="onDelete(productoStock.idproducto)"
+                                                        (mouseenter)="editOdeleteEnter(productoStock.idproducto, 'delete')" 
+                                                        (mouseleave)="editOdeleteLeave(productoStock.idproducto, 'delete')"></i>
                             </div>
                         </td>
                     </tr>
