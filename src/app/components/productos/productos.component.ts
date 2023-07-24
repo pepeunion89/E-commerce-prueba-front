@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, EventEmitter, Output } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Producto } from 'src/app/models/producto';
 import { ProductoStock } from 'src/app/models/productostock';
@@ -17,6 +17,7 @@ import { ServicioVentanasService } from 'src/app/services/servicio-ventanas.serv
 export class ProductosComponent implements OnInit {
 
   @Input() listStockActualizado:Stock[]=[];
+  @Output() idProductoEvent: EventEmitter<number> = new EventEmitter<number>();
 
   public listProductos: Producto[] = [];
   public listStock: Stock[] = [];
@@ -379,7 +380,7 @@ export class ProductosComponent implements OnInit {
 
           
           this.productoService.deleteProducto(idProducto).subscribe({
-            next:(Response: Number)=>{
+            next:(Response: number)=>{
               console.log("Se eliminó el producto con ID "+idProducto);
       
               //ACTUALIZAMOS TABLA EN WEB
@@ -403,7 +404,11 @@ export class ProductosComponent implements OnInit {
                     }
                   }      
       
-                  this.cdr.detectChanges();  
+                  this.cdr.detectChanges(); 
+                  
+                  this.idProductoEvent.emit(idProducto);
+
+
       
             },
             error:(Error: HttpErrorResponse)=>{

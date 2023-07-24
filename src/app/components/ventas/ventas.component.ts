@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ChangeDetectorRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Producto } from 'src/app/models/producto';
 import { ProductosService } from 'src/app/services/productos.service';
@@ -29,6 +29,9 @@ import { StockService } from 'src/app/services/stock.service';
 export class VentasComponent implements OnInit {
 
   @Output() listaActualizaraParaProducto:EventEmitter<Stock[]>=new EventEmitter<Stock[]>();
+  @Input() idProductoEvent: number = 0;
+
+  
 
   public listProductos: Producto[] = [];
   public listProductosCarrito: Venta[] = [];  
@@ -61,6 +64,23 @@ export class VentasComponent implements OnInit {
   ngOnInit(): void {
 
     this.getProdutos();
+
+  }
+
+  ngOnChanges():void{
+
+    alert("Cambio! "+this.idProductoEvent);
+
+    this.getProdutos();
+
+    this.stockService.getStock().subscribe({
+      next:(Response: Stock[])=>{
+        this.listStock = Response;
+      }, 
+        error:(error: HttpErrorResponse)=>{
+       alert("Error al obtener el stock");
+      }
+    })
 
   }
 

@@ -12,6 +12,7 @@ export class ContainerComponent implements OnInit, OnChanges {
   @Input() fromContainerMostrarPanel: String = '';
 
   public stockActualizado: Stock[]=[];
+  public idProductoEvent: number = 0;
 
   constructor() { }
 
@@ -51,6 +52,11 @@ export class ContainerComponent implements OnInit, OnChanges {
     this.stockActualizado=stock;
     console.log("A CONTAINER LLEGA ASI:");
     console.log(stock);
+  }
+
+  public actualizarTablaVentas(idProductoEvent: number){
+    this.idProductoEvent = idProductoEvent;
+    console.log(this.idProductoEvent);
   }
 
 

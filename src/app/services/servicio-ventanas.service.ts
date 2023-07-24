@@ -10,7 +10,7 @@ export class ServicioVentanasService {
 
   constructor(private dialog: MatDialog) {}
 
-  public abrirVentanaConfirmacionDelete(idProducto: Number):Observable<any>{
+  public abrirVentanaConfirmacionDelete(idProducto: number):Observable<any>{
 
     let data: any = idProducto; 
     
