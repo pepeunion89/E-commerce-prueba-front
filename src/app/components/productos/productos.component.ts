@@ -7,6 +7,7 @@ import { ProductosService } from 'src/app/services/productos.service';
 import { StockService } from 'src/app/services/stock.service';
 import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { ServicioVentanasService } from 'src/app/services/servicio-ventanas.service';
 
 @Component({
   selector: 'app-productos',
@@ -24,7 +25,10 @@ export class ProductosComponent implements OnInit {
   comparador = 1;
   
 
-  constructor(private productoService: ProductosService, private stockService: StockService, private cdr: ChangeDetectorRef) {
+  constructor(private productoService: ProductosService, 
+              private stockService: StockService, 
+              private cdr: ChangeDetectorRef,
+              private servicioVentanas: ServicioVentanasService) {
    
    }
 
@@ -368,41 +372,52 @@ export class ProductosComponent implements OnInit {
 
   public onDelete(idProducto: number):void{
 
-    
+    this.servicioVentanas.abrirVentanaConfirmacionDelete(idProducto).subscribe({
+      next:(Response: any)=>{
 
-    this.productoService.deleteProducto(idProducto).subscribe({
-      next:(Response: Number)=>{
-        console.log("Se eliminó el producto con ID "+idProducto);
+        if(Response==='confirma'){
 
-        //ACTUALIZAMOS TABLA EN WEB
-
-            this.getProdutos();
-            this.getStock();
-
-            this.listProductoStock = [];
-            for(let producto of this.listProductos){
-              for(let stock of this.listStock){
-                if(producto.idproducto === stock.idproducto){
-                  const productoStock: ProductoStock = {
-                    idproducto : producto.idproducto,
-                    idstock : stock.idstock,
-                    nompro: producto.nompro,
-                    precio: producto.precio,
-                    cantidad: stock.cantidad
-                  };
-                  this.listProductoStock.push(productoStock);
-                }
-              }
-            }      
-
-            this.cdr.detectChanges();  
-
+          
+          this.productoService.deleteProducto(idProducto).subscribe({
+            next:(Response: Number)=>{
+              console.log("Se eliminó el producto con ID "+idProducto);
+      
+              //ACTUALIZAMOS TABLA EN WEB
+      
+                  this.getProdutos();
+                  this.getStock();
+      
+                  this.listProductoStock = [];
+                  for(let producto of this.listProductos){
+                    for(let stock of this.listStock){
+                      if(producto.idproducto === stock.idproducto){
+                        const productoStock: ProductoStock = {
+                          idproducto : producto.idproducto,
+                          idstock : stock.idstock,
+                          nompro: producto.nompro,
+                          precio: producto.precio,
+                          cantidad: stock.cantidad
+                        };
+                        this.listProductoStock.push(productoStock);
+                      }
+                    }
+                  }      
+      
+                  this.cdr.detectChanges();  
+      
+            },
+            error:(Error: HttpErrorResponse)=>{
+              console.log("Error: "+Error);
+            }
+          })
+        }
       },
       error:(Error: HttpErrorResponse)=>{
-        console.log("Error: "+Error);
+        console.log("Error");
       }
-    })
+      
+    });
 
-  }
+    }
 
 }

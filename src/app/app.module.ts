@@ -18,6 +18,8 @@ import { ProductosComponent } from './components/productos/productos.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CurrencyPipe } from '@angular/common';
+import { CartelconfirmacionComponent } from './components/cartelconfirmacion/cartelconfirmacion.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { CurrencyPipe } from '@angular/common';
     StockComponent,
     PreciosComponent,
     DetallesComponent,
-    ProductosComponent
+    ProductosComponent,
+    CartelconfirmacionComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { CurrencyPipe } from '@angular/common';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [CurrencyPipe],
   bootstrap: [AppComponent]
