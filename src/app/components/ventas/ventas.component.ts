@@ -69,18 +69,28 @@ export class VentasComponent implements OnInit {
 
   ngOnChanges():void{
 
-    alert("Cambio! "+this.idProductoEvent);
+    if(this.idProductoEvent===-1){
 
-    this.getProdutos();
+      console.log("Se actualizó pestaña VENTAS al agregar producto.");
 
-    this.stockService.getStock().subscribe({
-      next:(Response: Stock[])=>{
-        this.listStock = Response;
-      }, 
-        error:(error: HttpErrorResponse)=>{
-       alert("Error al obtener el stock");
-      }
-    })
+    }else{
+
+      console.log("Cambio! "+this.idProductoEvent);
+      
+    }
+
+      this.getProdutos();
+
+      this.stockService.getStock().subscribe({
+        next:(Response: Stock[])=>{
+          this.listStock = Response;
+        }, 
+          error:(error: HttpErrorResponse)=>{
+        alert("Error al obtener el stock");
+        }
+      })
+
+    
 
   }
 

@@ -2,7 +2,7 @@
   
   <!-- FILA TITULOS -->
 
-  <div class="d-flex flex-column">
+  <div class="contenedor-listado-busqueda d-flex flex-column">
     <div class="input-group mb-3">
       <span class="input-group-text" id="basic-addon1">@</span>
       <input type="text" class="form-control px-2" placeholder="Buscar producto..." aria-label="Producto" aria-describedby="basic-addon1">
@@ -10,21 +10,25 @@
     <table class="table table-hover mb-0">
       <thead class="thead-productos">
         <tr>
-          <th scope="col"># Código</th>
-          <th scope="col">Producto</th>
-          <th scope="col">Precio</th>
-          <th scope="col"></th>
+          <th style="width: 10%; text-align: center;" scope="">#</th>
+          <th style="width: 50%; text-indent: 0.5rem;" scope="">Producto</th>
+          <th style="width: 25%;" scope="">Precio</th>
+          <th style="width: 15%;" scope=""></th>
         </tr>
       </thead>
     </table>
-    <div class="tabla-productos px-2" style="border: 1px solid lightgray;">    
+    <div class="tabla-productos" style="border: 1px solid lightgray;">    
       <tbody>
-        <tr class="opcion-producto" *ngFor="let producto of listProductos">
-          <th scope="row">{{producto.idproducto}}</th>
-          <td>{{producto.nompro}}</td>
-          <td>{{producto.precio}}</td>
-          <td><i class="bi bi-plus-circle" style="font-size: 1.5rem" (click)="agregarAlCarrito(producto)"></i></td>
-        </tr>        
+        <td *ngFor="let producto of listProductos" class="d-flex flex-wrap">
+          <tr class="opcion-producto" style="width: 400px;" >
+            <th style="width: 54px; padding-right: 8px; text-indent: 0.5rem;" scope="row">{{producto.idproducto}}</th>
+            <td style="width: 220px; padding-right: 8px;">{{producto.nompro}}</td>
+            <td style="width: 80px; padding-right: 8px;">{{producto.precio}}</td>
+            <td style="width: 60px; padding-right: 8px;"><i class="bi bi-plus-circle" style="font-size: 1.5rem" (click)="agregarAlCarrito(producto)"></i></td>
+          </tr>   
+          <tr style="width: 100%; height: 2px; border: 1px solid rgb(243, 243, 243);">
+          </tr> 
+        </td>
       </tbody>
     </div>
   </div>
@@ -68,7 +72,7 @@
             </div>    
           </div>
           <div class="col-1">
-            <p style="text-indent: -0.3rem"><i class="quitar-producto bi bi-dash-circle" style="font-size: 1.5rem" (click)="eliminarDelCarrito(producto)">-</i></p>
+            <p style="text-indent: -0.3rem"><i class="quitar-producto bi bi-dash-circle" style="font-size: 1.5rem" (click)="eliminarDelCarrito(producto)"></i></p>
           </div>
         </div>
       </div>

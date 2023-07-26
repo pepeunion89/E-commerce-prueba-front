@@ -2,6 +2,12 @@
 
 .contenedor-tablas{
 
+    .contenedor-listado-busqueda{
+
+        width: 400px;
+
+    }
+
     .thead-productos{
             background-color: #62B6B7;
             color:white;
@@ -21,8 +27,7 @@
 
         }
 
-    .tabla-productos{    
-        width: 100%;
+    .tabla-productos{  
         height: 390px;        
         overflow-y: scroll;
         scrollbar-width: thin;

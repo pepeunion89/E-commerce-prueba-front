@@ -34,5 +34,11 @@ export class StockService {
 
   }
 
+  public deleteStock(idStock: number):Observable<number>{
+
+    return this.http.delete<number>(`${this.apiServerUrl}/stock/delete/${idStock}`);
+
+  }
+
 
 }

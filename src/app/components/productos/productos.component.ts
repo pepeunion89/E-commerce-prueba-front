@@ -232,8 +232,8 @@ export class ProductosComponent implements OnInit {
     document.getElementById('cerrar-nuevo-producto')?.click();
 
     
-// AGREGAMOS PRODUCTO NUEVO
-  this.productoService.addProducto(ngProducto.value).subscribe({
+    // AGREGAMOS PRODUCTO NUEVO
+    this.productoService.addProducto(ngProducto.value).subscribe({
       next:(Response: Producto)=>{
         console.log("Se ha agregado "+Response.nompro+" correctamente");
 
@@ -269,7 +269,10 @@ export class ProductosComponent implements OnInit {
               }
             }      
 
-            this.cdr.detectChanges();    
+                             
+                  this.cdr.detectChanges(); 
+                  
+                  this.idProductoEvent.emit(-1); 
 
           }
         });
@@ -286,6 +289,9 @@ export class ProductosComponent implements OnInit {
     ngProducto.reset();
 
   }
+
+
+  // METODO EDITAR PRODUCTO
 
   public onEdit(idProductoStock:number): void{
 
@@ -382,7 +388,7 @@ export class ProductosComponent implements OnInit {
           this.productoService.deleteProducto(idProducto).subscribe({
             next:(Response: number)=>{
               console.log("Se eliminó el producto con ID "+idProducto);
-      
+
               //ACTUALIZAMOS TABLA EN WEB
       
                   this.getProdutos();
@@ -403,7 +409,23 @@ export class ProductosComponent implements OnInit {
                       }
                     }
                   }      
-      
+
+                  for(let indexador of this.listStock){
+
+                    if(indexador.idproducto===idProducto){
+
+                      console.log("ENTRO ACA EN COMPARACION STOCK DELETE");
+                      console.log("EL ID DE STOCK ES "+indexador.idstock);
+
+                      this.stockService.deleteStock(indexador.idstock).subscribe(response=>{
+                        alert("Se eliminó: "+indexador.nompro);
+                      });
+
+                    }
+
+                  }
+
+                  
                   this.cdr.detectChanges(); 
                   
                   this.idProductoEvent.emit(idProducto);
