@@ -69,9 +69,11 @@ export class VentasComponent implements OnInit {
 
   ngOnChanges():void{
 
-    if(this.idProductoEvent===-1){
 
-      console.log("Se actualizó pestaña VENTAS al agregar producto.");
+
+    if(this.idProductoEvent===999){
+
+      console.log("Se actualizó pestaña VENTAS al agregar producto. "+this.idProductoEvent);
 
     }else{
 

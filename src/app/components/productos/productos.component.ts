@@ -234,6 +234,7 @@ export class ProductosComponent implements OnInit {
     
     // AGREGAMOS PRODUCTO NUEVO
     this.productoService.addProducto(ngProducto.value).subscribe({
+      
       next:(Response: Producto)=>{
         console.log("Se ha agregado "+Response.nompro+" correctamente");
 
@@ -272,7 +273,9 @@ export class ProductosComponent implements OnInit {
                              
                   this.cdr.detectChanges(); 
                   
-                  this.idProductoEvent.emit(-1); 
+            let variador: Date= new Date();
+
+                  this.idProductoEvent.emit(variador.getTime()); 
 
           }
         });
@@ -419,6 +422,8 @@ export class ProductosComponent implements OnInit {
 
                       this.stockService.deleteStock(indexador.idstock).subscribe(response=>{
                         alert("Se eliminó: "+indexador.nompro);
+
+
                       });
 
                     }
