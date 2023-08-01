@@ -300,36 +300,66 @@ export class ProductosComponent implements OnInit {
 
     let iconEdit = document.getElementById('id-edit-icon-'+idProductoStock) as HTMLElement;
 
+    // VARIABLES DE PARRAFOS
+    let parrafo_nombre =  document.getElementById('parrafo-nombre-'+idProductoStock) as HTMLElement;
+    let parrafo_precio = document.getElementById('parrafo-precio-'+idProductoStock) as HTMLElement;
+
+     // VARIABLES DE INPUTS
+    let editable_nombre = document.getElementById('input-nombre-'+idProductoStock) as HTMLElement;
+    let editable_precio = document.getElementById('input-precio-'+idProductoStock) as HTMLElement;
+
     if(this.banderaEdit===0){
+      
+      parrafo_nombre.style.display= "none";      
+      parrafo_precio.style.display= "none";
 
-      let parrafo =  document.getElementById('parrafo-nombre-'+idProductoStock) as HTMLElement;
-      parrafo.style.display= "none";
+      
+      editable_nombre.style.display="block";
+      editable_precio.style.display="block";
 
-      let editable = document.getElementById('input-nombre-'+idProductoStock) as HTMLElement;
-      editable.style.display="block";
 
       this.banderaEdit=1;
 
     }else{
       //Checkeamos si camió datos primero
       let nomProEditado = document.getElementById('input-nombre-'+idProductoStock) as HTMLInputElement;
+      let preProEditado = document.getElementById('input-precio-'+idProductoStock) as HTMLInputElement;
      
       for(let productoStock of this.listProductoStock){
         if(idProductoStock==productoStock.idproducto){
 
-          if(nomProEditado.value != productoStock.nompro){
-            alert("CAMBIASTE EL NOMBRE! Deseas guardar el cambio?")
+
+          // ACA VIENE AHORA LA EJECUCION DEL SERVICIO DE VENTANAS DE CONFIRMACION
+
+          if(nomProEditado.value != productoStock.nompro || Number(preProEditado.value) != productoStock.precio){
+            this.servicioVentanas.abrirVentanaConfirmacionDelete(idProductoStock).subscribe(res=>{
+              if(res==='confirma'){
+
+                let pro : Producto = {
+
+                  idproducto : productoStock.idproducto,
+                  nompro : nomProEditado.value,
+                  precio : Number(preProEditado.value)
+
+                }
+
+
+                this.productoService.editProducto(pro).subscribe(res=>{
+                  console.log("EDITADO "+res);
+                })
+
+              }
+            })
           }
 
         }
       }
        
+      parrafo_nombre.style.display= "block";
+      parrafo_precio.style.display= "block";
 
-      let parrafo =  document.getElementById('parrafo-nombre-'+idProductoStock) as HTMLElement;
-      parrafo.style.display= "block";
-
-      let editable = document.getElementById('input-nombre-'+idProductoStock) as HTMLElement;
-      editable.style.display="none";
+      editable_nombre.style.display="none";
+      editable_precio.style.display="none";
        
 
       this.banderaEdit=0;

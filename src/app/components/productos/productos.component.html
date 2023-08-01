@@ -58,7 +58,8 @@
                         </td>
                         <td class="col-2">
                             <div class="d-flex flex-column w-100 justify-content-center align-content-center" style="height: 6rem;">
-                                <p class="mb-0">${{productoStock.precio}}</p>
+                                <p id="parrafo-precio-{{productoStock.idproducto}}" class="mb-0">${{productoStock.precio}}</p>
+                                <input id="input-precio-{{productoStock.idproducto}}" type="text" value="{{productoStock.precio}}" style="display: none; width: 80px;">
                             </div> 
                         </td>
                         <td class="col-2 celda-contenedor-quantity d-flex">

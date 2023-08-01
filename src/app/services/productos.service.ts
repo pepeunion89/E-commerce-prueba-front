@@ -20,6 +20,12 @@ export class ProductosService {
 
   }
 
+  public editProducto(producto: Producto):Observable<Producto>{
+
+    return this.http.put<Producto>(`${this.apiServerUrl}/producto/update`, producto);
+
+  }
+
   public addProducto(producto: Producto):Observable<Producto>{
     
     return this.http.post<Producto>(`${this.apiServerUrl}/producto/add`, producto);
